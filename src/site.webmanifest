@@ -1,0 +1,9 @@
+{
+    "name": "Platformer",
+    "short_name": "Platformer",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "App with only browser capabilities.",
+    "icons": []
+  }

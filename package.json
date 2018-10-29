@@ -1,0 +1,16 @@
+{
+  "name": "platformer",
+  "version": "0.1.0",
+  "description": "App with only browser capabilities.",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Norbert Csaba Herczeg <noherczeg@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "10.0.2"
+  }
+}
