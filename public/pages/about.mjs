@@ -7,6 +7,7 @@ class About extends HTMLElement {
 
   get template() {
     return `
+      <p-menu></p-menu>
       <h3>I'm: About</h3>
       <p>Yayy for me... please?!</p>
     `;

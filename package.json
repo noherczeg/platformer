@@ -4,13 +4,14 @@
   "description": "App with only browser capabilities.",
   "main": "src/index.html",
   "scripts": {
-    "start": "serve",
+    "start": "json-server --watch db.js --routes routes.json --port 5000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Norbert Csaba Herczeg <noherczeg@gmail.com",
+  "author": "Norbert Csaba Herczeg <noherczeg@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "serve": "10.0.2"
+    "faker": "^4.1.0",
+    "json-server": "^0.14.0"
   }
 }

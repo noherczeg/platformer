@@ -1,6 +1,8 @@
 import '../pages/notFound.mjs';
 import '../pages/home.mjs';
 import '../pages/about.mjs';
+import '../pages/login.mjs';
+import { isLoggedIn } from '../auth/auth.mjs';
 
 export const routes = [
   { name: 'home', title: 'Home' },
@@ -8,6 +10,9 @@ export const routes = [
 ];
 
 export const getRoute = () => {
+  if (!isLoggedIn()) {
+    return 'login';
+  }
   const route = window.location.hash.substr(1) || 'home';
   return routes.find(r => r.name === route) ? route : 'not-found';
 };

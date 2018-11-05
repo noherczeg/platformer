@@ -1,4 +1,6 @@
 import { getRoute } from './utils/router.mjs';
+import { isLoggedIn } from './auth/auth.mjs';
+
 import './components/menu.mjs';
 
 class App extends HTMLElement {
@@ -10,12 +12,14 @@ class App extends HTMLElement {
 
   get template() {
     return `
-      <p-menu></p-menu>
-      <p-router page="${getRoute()}"></p-router>
+      <p-router page="${this.getPageName()}"></p-router>
     `;
   }
 
   connectedCallback() {
+    if (!isLoggedIn()) {
+      window.location.href = '#login';
+    }
     this.shadowRoot.innerHTML = this.template;
     window.addEventListener('hashchange', this.onHashChanged.bind(this));
   }
@@ -24,12 +28,16 @@ class App extends HTMLElement {
     window.removeEventListener('hashchange', this.onHashChanged.bind(this));
   }
 
-  onHashChanged(event) {
+  onHashChanged() {
     this.shadowRoot
       .querySelector('p-router')
-      .setAttribute('page', getRoute());
+      .setAttribute('page', this.getPageName());
   }
-  
+
+  getPageName() {
+    return getRoute().split('/')[0];
+  }
+
 }
 
 customElements.define('p-app', App);
