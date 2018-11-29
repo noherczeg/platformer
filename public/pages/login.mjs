@@ -5,10 +5,6 @@ class Login extends HTMLElement {
     super();
 
     this.attachShadow({ mode: 'open' });
-    this.state = {
-      username: '',
-      password: '',
-    };
   }
 
   get template() {
@@ -18,11 +14,11 @@ class Login extends HTMLElement {
       <form id="login" name="login">
         <label>
           username:
-          <input id="username" type="text" name="username" value="${this.state.username}" />
+          <input id="username" type="text" name="username" />
         </label>
         <label>
           password:
-          <input id="password" type="password" name="password" value="${this.state.password}" />
+          <input id="password" type="password" name="password" />
         </label>
         <button id="login" type="submit">Login</button>
       </form>
@@ -32,27 +28,16 @@ class Login extends HTMLElement {
   connectedCallback() {
     this.shadowRoot.innerHTML = this.template;
     this.shadowRoot.querySelector('#login').addEventListener('submit', this.onSubmit.bind(this));
-    this.shadowRoot.querySelector('#username').addEventListener('blur', this.onUsernameChanged.bind(this));
-    this.shadowRoot.querySelector('#password').addEventListener('blur', this.onPasswordChanged.bind(this));
   }
 
   disconnectedCallback() {
     this.shadowRoot.querySelector('#login').removeEventListener('submit', this.onSubmit.bind(this));
-    this.shadowRoot.querySelector('#username').removeEventListener('blur', this.onUsernameChanged.bind(this));
-    this.shadowRoot.querySelector('#password').removeEventListener('blur', this.onPasswordChanged.bind(this));
-  }
-
-  onUsernameChanged(evt) {
-    this.state.username = evt.target.value
-  }
-
-  onPasswordChanged(evt) {
-    this.state.password = evt.target.value;
   }
 
   onSubmit(event) {
     event.preventDefault();
-    login(Object.assign({}, {username: this.state.username}));
+    const { username } = event.target.elements;
+    login(Object.assign({}, { username: username.value }));
   }
 }
 
